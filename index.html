@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>犬の性格診断</title>
+  <script src="https://static.line-scdn.net/liff/2.22.2/sdk.js"></script>
+</head>
+<body>
+  <h1>犬の性格診断</h1>
+  <p>診断開始ボタンを押してください</p>
+  <button onclick="startDiagnosis()">診断開始</button>
+
+  <script>
+    // LIFF IDはまだ貼り付けないでください
+    const liffId = '';
+
+    async function initializeLiff() {
+      try {
+        await liff.init({ liffId: liffId });
+        console.log('LIFFの初期化に成功しました。');
+      } catch (error) {
+        console.error('LIFFの初期化に失敗しました。', error);
+      }
+    }
+
+    async function startDiagnosis() {
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      } else {
+        liff.sendMessages([
+          {
+            type: 'text',
+            text: '診断を開始します！'
+          }
+        ])
+        .then(() => {
+          liff.closeWindow();
+        })
+        .catch((error) => {
+          console.log('エラーが発生しました', error);
+        });
+      }
+    }
+
+    initializeLiff();
+  </script>
+</body>
+</html>
