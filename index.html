@@ -27,12 +27,10 @@
       if (!liff.isLoggedIn()) {
         liff.login();
       } else {
-        liff.sendMessages([
-          {
-            type: 'text',
-            text: '診断を開始します！'
-          }
-        ])
+        liff.sendMessages([{
+          "type": "text",
+          "text": "診断を開始します！"
+        }])
         .then(() => {
           liff.closeWindow();
         })
